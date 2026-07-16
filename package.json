@@ -1,0 +1,16 @@
+{
+  "name": "ai-coding-spend-check",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/audit.js && node --check public/app.js && node --check scripts/build.mjs && node --check scripts/verify.mjs",
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
