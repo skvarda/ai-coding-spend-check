@@ -91,8 +91,17 @@ function parseNonNegativeNumber(rawValue, fieldName, rowNumber, { integer = fals
 
 function assertValidDate(value, rowNumber) {
   const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
-  const timestamp = Date.parse(`${value}T00:00:00Z`);
-  if (!isoDatePattern.test(value) || Number.isNaN(timestamp)) {
+  if (!isoDatePattern.test(value)) {
+    throw new Error(`Row ${rowNumber}: date must use YYYY-MM-DD`);
+  }
+
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
     throw new Error(`Row ${rowNumber}: date must use YYYY-MM-DD`);
   }
 }
@@ -176,7 +185,9 @@ function groupBy(items, keySelector) {
   const groups = new Map();
   for (const item of items) {
     const key = keySelector(item);
-    groups.set(key, [...(groups.get(key) ?? []), item]);
+    const group = groups.get(key) ?? [];
+    group.push(item);
+    groups.set(key, group);
   }
   return groups;
 }
@@ -194,6 +205,11 @@ function summarizeSpend(rows, keySelector) {
 export function analyzeSpend(rows) {
   if (!Array.isArray(rows) || rows.length === 0) {
     throw new TypeError("Spend analysis requires at least one row");
+  }
+
+  const calendarMonths = new Set(rows.map((row) => row.date.slice(0, 7)));
+  if (calendarMonths.size > 1) {
+    throw new Error("Spend analysis accepts one calendar month at a time");
   }
 
   const totalMonthlySpend = roundCurrency(

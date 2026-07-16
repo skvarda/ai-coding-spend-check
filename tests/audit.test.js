@@ -52,6 +52,14 @@ test("parseCsv rejects negative and non-numeric values", () => {
   );
 });
 
+test("parseCsv rejects calendar dates that JavaScript would otherwise normalize", () => {
+  assert.throws(
+    () => parseCsv(`date,user,provider,plan_monthly_cost,usage_cost,active_days,commits,pull_requests
+2026-02-31,a@example.com,Codex,20,0,3,4,1`),
+    /date must use YYYY-MM-DD/,
+  );
+});
+
 test("parseCsv caps the input at 10,000 data rows", () => {
   const header = "date,user,provider,plan_monthly_cost,usage_cost,active_days,commits,pull_requests";
   const dataRow = "2026-06-01,a@example.com,Codex,20,0,1,1,0";
@@ -91,6 +99,14 @@ test("analyzeSpend returns null efficiency metrics when no output is reported", 
 
   assert.equal(analysis.summary.costPerCommit, null);
   assert.equal(analysis.summary.costPerPullRequest, null);
+});
+
+test("analyzeSpend rejects data spanning more than one calendar month", () => {
+  const rows = parseCsv(`date,user,provider,plan_monthly_cost,usage_cost,active_days,commits,pull_requests
+2026-06-01,a@example.com,Codex,20,0,2,3,1
+2026-07-01,b@example.com,Claude Code,100,0,4,8,2`);
+
+  assert.throws(() => analyzeSpend(rows), /one calendar month/);
 });
 
 test("analyzeSpend rejects an empty dataset", () => {
