@@ -33,7 +33,7 @@ The paid founding offer is a human-reviewed, vendor-neutral audit for **$250**, 
 
 ## Commands
 
-- Develop: `python3 -m http.server 4173 --directory public`
+- Develop: `npm run build && python3 -m http.server 4173 --directory dist`
 - Test: `npm test`
 - Build: `npm run build`
 - Lint/check: `npm run check`

@@ -1,0 +1,4 @@
+date,user,provider,plan_monthly_cost,usage_cost,active_days,commits,pull_requests
+2026-06-01,alex@example.com,Claude Code,100,25,18,32,7
+2026-06-01,alex@example.com,Codex,20,0,4,8,2
+2026-06-01,sam@example.com,GitHub Copilot,39,0,0,0,0
