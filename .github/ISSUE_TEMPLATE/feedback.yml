@@ -1,0 +1,40 @@
+name: Product feedback
+description: Share feedback about the local analyzer without posting private spend data.
+title: "Feedback: "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying AI Coding Spend Check. Please do not attach vendor exports, employee names, email addresses, account identifiers, or other private data to this public issue.
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Which perspective best describes you?
+      options:
+        - Individual developer
+        - Engineering manager
+        - Engineering or platform leader
+        - Finance or procurement
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: useful
+    attributes:
+      label: What was useful or unclear?
+      placeholder: Tell us what helped, what was confusing, or what stopped you from completing the check.
+    validations:
+      required: true
+  - type: textarea
+    id: missing
+    attributes:
+      label: What would make this valuable enough to use before a renewal?
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public-data check
+      options:
+        - label: I have not included private spend data or personal information.
+          required: true
