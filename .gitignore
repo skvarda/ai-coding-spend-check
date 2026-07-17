@@ -8,3 +8,4 @@ node_modules/
 .DS_Store
 customer-data/
 *.customer.csv
+outreach/private/
