@@ -1,6 +1,14 @@
 import { access, readFile } from "node:fs/promises";
 
-const requiredFiles = ["index.html", "styles.css", "app.js", "audit.js", "template.csv"];
+const requiredFiles = [
+  "index.html",
+  "styles.css",
+  "app.js",
+  "audit.js",
+  "template.csv",
+  "robots.txt",
+  "sitemap.xml",
+];
 for (const file of requiredFiles) {
   await access(new URL(`../dist/${file}`, import.meta.url));
 }
@@ -14,6 +22,7 @@ for (const id of requiredIds) {
 }
 
 if (!html.includes("Content-Security-Policy")) throw new Error("Missing Content Security Policy");
+if (!html.includes('rel="canonical"')) throw new Error("Missing canonical URL");
 if (/innerHTML|insertAdjacentHTML|eval\s*\(/.test(app)) {
   throw new Error("Unsafe DOM or code execution pattern found in app.js");
 }

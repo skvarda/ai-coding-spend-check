@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skvarda.github.io/ai-coding-spend-check/sitemap.xml
