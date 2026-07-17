@@ -50,4 +50,8 @@ The initial direction came from 747 dated AI Pulse Daily reports across Reddit, 
 
 ## Founding audit
 
-The paid offer is a $250 human-reviewed audit for teams using multiple AI coding vendors. Payment is due only if the audit identifies at least $500 in credible annual savings.
+The paid offer is a $250 human-reviewed audit for teams using multiple AI coding vendors. Payment is due only if the audit identifies at least $500 in credible annual savings. [Request an audit](mailto:sean@stateofgtm.com?subject=Founding%20AI%20coding%20spend%20audit).
+
+## Feedback
+
+[Share product feedback](https://github.com/skvarda/ai-coding-spend-check/issues/new?template=feedback.yml) without posting vendor exports, employee names, account identifiers, or other private data.
